@@ -15,9 +15,13 @@ public class HotelInformation {
     // 예약 데이터
     private ArrayList<ReserveData>  reserveData = new ArrayList<>();
 
-
+    // 예약 번호 생성에 필요한 hotel 을 불러옴
+    Hotel hotel = new Hotel();
     public void HotelInformation() {
-
+        //HotelInformation 객체를 생성할때 호텔 객실 데이터 생성 후 저장
+        hotels.add(new Hotel(1,29,40000,false));
+        hotels.add(new Hotel(2, 32,50000,false));
+        hotels.add(new Hotel(3, 40,70000,false));
 
     }
 
@@ -32,11 +36,8 @@ public class HotelInformation {
 //    }
 
     public void customerRoom() {
-        hotels = new ArrayList<>();
         System.out.println("고객객실정보");
-        hotels.add(new Hotel(1,29,40000,false));
-        hotels.add(new Hotel(2, 32,50000,false));
-        hotels.add(new Hotel(3, 40,70000,false));
+
 
         for(int i = 0; i< hotels.size();i++){
             System.out.println(hotels.get(i).getHotelNumber() + ". | " + hotels.get(i).getSize()+ " | " + hotels.get(i).getPrice()
@@ -45,8 +46,8 @@ public class HotelInformation {
 
     }
 
+    // 고갱 정보 입력
     public void insertCustomerInformation() {
-        //객실 방 번호를 가져온 상태
 
         System.out.println("사용자 이름을 입력하세요");
         String name = sc.nextLine();
@@ -70,13 +71,23 @@ public class HotelInformation {
 
         System.out.println("객실을 선택하세요");
         int roomNumber = sc.nextInt()-1;
+        sc.nextLine();
+        //객실이 예약이 되어있는지 확인
+        if(!hotels.get(roomNumber).getReserve()){
+            //예약이 안되어있을경우
 
-        // 객실에 정해진 가격보다 작으면 예약 불가하게 하기
-        if(checkPrice(roomNumber, money)){
-            // 데이터 생성해주거나 맞춰주는 함수 생성
-            createList(roomNumber,name,phone);
+            // 객실에 정해진 가격보다 작으면 예약 불가하게 하기
+            if(checkPrice(roomNumber, money)){
+                // 데이터 생성해주거나 맞춰주는 함수 생성
+                createList(roomNumber,name,phone);
+            }else {
+                System.out.println("카드 잔액을 확인하세요");
+                Main.mainDisplayHandle();
+            }
+
         }else {
-            System.out.println("카드 잔액을 확인하세요");
+            //예약이 되어 있는경우
+            System.out.println("이미 예약된 객실입니다.");
             Main.mainDisplayHandle();
         }
 
@@ -96,10 +107,9 @@ public class HotelInformation {
     //예약 데이터 생성
     private void createList(int roomNumber,String name, String phone) {
 
-        System.out.println("호텔 데이터"+hotels.size());
-
         //예약번호 생성
-        String reserveNumber = "100";
+        int reserveNumber = hotel.setReserveNumber();
+
         //날짜 생성
         LocalDateTime localDateTime = LocalDateTime.now();
 
@@ -112,22 +122,20 @@ public class HotelInformation {
 
 
 
-        System.out.println("customers.size()"+reserveData.size());
+        System.out.println("reserveData.size()"+reserveData.size());
         for(int i =0; i<reserveData.size();i++){
-            System.out.println(reserveData.get(i).getDate());
+            System.out.println(reserveData.get(i).getName() + reserveData.get(i).getPhone() + "number" + reserveData.get(i).getHotelNumber() + " size" + reserveData.get(i).getSize()
+                    + " price " + reserveData.get(i).getPrice() + reserveData.get(i).getReserveNumber() + reserveData.get(i).getDate());
         }
 
         System.out.println("예약이 완료 되었습니다.");
+
+        // 객실 정보 true 변경 함수
+        reserveComplete(roomNumber);
+
         Main.mainDisplayHandle();
     }
 
-//    public void 고객객실예약() {
-//        System.out.println("고객객실예약");
-//        Main.mainDisplayHandle();
-//    }
-
-    // 사용자 입력
-    // 날짜, 예약 번호 정해지고
 
 
 //    public void 고객예약취소() {

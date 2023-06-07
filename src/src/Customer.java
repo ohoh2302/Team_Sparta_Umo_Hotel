@@ -2,7 +2,6 @@ public class Customer {
     private String name;
     private String phone;
     private int money;
-    private int hotelNumber = 0;
     public Customer(String name, String phone, int money ) {
         this.name = name;
         this.phone = phone;
@@ -22,8 +21,4 @@ public class Customer {
         return money;
     }
 
-    // 예약 완료시 고객 호텔 번호 변경
-    public void setHotelNumber(int hotelNumber){
-        this.hotelNumber = hotelNumber;
-    }
 }
