@@ -62,7 +62,7 @@ public class Main {
                     hotelInform.insertCustomerInformation();
                     break;
                 case 3:
-//                    hotelInform.고객예약취소();
+                    hotelInform.customerCancelCheck();
                     break;
                 case 4:
 //                    hotelInform.고객예약목록();
@@ -92,6 +92,14 @@ public class Main {
         System.out.println("4.예약목록");
 
         customerDisplayHandle();
+    }
+
+    private void cancelReserve(){
+
+
+        System.out.println("취소하시겠습니까?");
+        customerDisplayHandle();
+
     }
 
     private static void getHotelDisplay() {
