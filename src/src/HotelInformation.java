@@ -25,10 +25,20 @@ public class HotelInformation {
 
     }
 
-//    public void 호텔예약목록() {
-//        System.out.println("호텔예약목록");
-//        Main.mainDisplayHandle();
-//    }
+    public void 호텔예약목록() {
+        //hotelReservationCheck : 객실, 이름, 전화번호, 날짜
+        System.out.println("호텔예약목록");
+            for(int i = 0; i< reserveData.size();i++){
+        ReserveData rd = reserveData.get(i);
+        System.out.println
+                (
+                        rd.getHotelNumber() + " | " +
+                        rd.getName() + " | " +
+                        rd.getPhone() + " | " +
+                        rd.getDate());
+    }
+        Main.mainDisplayHandle();
+    }
 
 //    public void 호텔자산() {
 //        System.out.println("호텔자산");
@@ -160,3 +170,5 @@ public class HotelInformation {
 
 
 }
+
+
