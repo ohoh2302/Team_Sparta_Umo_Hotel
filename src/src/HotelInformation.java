@@ -163,7 +163,7 @@ public class HotelInformation {
 
     public void customerCancelCheck() {
         System.out.println("객실 번호를 입력하세요");
-        int roomNum = sc.nextInt() - 1;
+        int roomNum = sc.nextInt();
 //
 //        System.out.println("사용자 이름을 입력하세요");
 //        String name = sc.nextLine();
@@ -177,22 +177,30 @@ public class HotelInformation {
 }
 
     private void cancelReserve(int roomNumber, int reserveNum){
-        for(int i = 0; i < reserveData.size(); i++) {
-            if (reserveNum ==reserveData.get(i).getReserveNumber() // 예약번호가 맞아야 취소
-                && roomNumber == hotels.get(i).getHotelNumber()){
-                hotels.get(roomNumber).setReserve(false); // 취소하면 false로 다시 바꾸기
-                reserveData.remove(i);
-                System.out.println("취소 완료");
+        for(int i = 0; i < reserveData.size() ; i++) {
+                if (reserveNum == reserveData.get(i).getReserveNumber()
+                    && roomNumber == reserveData.get(i).getHotelNumber()) { // 객실번호와 예약번호가 맞아야 취소
+                    reserveCancel(roomNumber);// 취소하면 false로 다시 바꾸기
+                    reserveData.remove(i);
+                    System.out.println("취소 완료");
+                    Main.mainDisplayHandle();
+
+
+                } else System.out.println("다시 입력해주세요.");
                 Main.mainDisplayHandle();
-
-
-
             }
-            else System.out.println("다시 입력해주세요.");
-            Main.mainDisplayHandle();
+
 
         }
+
+        //boolean값 다시 false로 바꾸기
+    private void reserveCancel(int roomNumber) {
+        roomNumber--;
+        hotels.get(roomNumber).setReserve(false);
     }
+
+
+
 
 
 
