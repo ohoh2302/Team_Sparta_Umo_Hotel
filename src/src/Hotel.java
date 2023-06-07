@@ -9,4 +9,16 @@ public class Hotel {
         this.price = price;
         this.reserve = reserve;
     }
+
+    public int getSize(){
+        return size;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public boolean getReserve() {
+        return reserve;
+    }
 }
