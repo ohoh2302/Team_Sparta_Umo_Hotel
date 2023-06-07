@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class HotelInformation {
 
     private ArrayList<Hotel> hotels;
