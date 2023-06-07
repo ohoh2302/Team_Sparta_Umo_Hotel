@@ -1,8 +1,10 @@
 import java.util.Scanner;
 
 public class Main {
+    private static HotelInformation hotelInform = new HotelInformation();
 
     public static void main(String[] args) {
+
         mainDisplayHandle();
     }
 
@@ -28,7 +30,6 @@ public class Main {
 
     public static void hotelDisplayHandle() {
         Scanner sc = new Scanner(System.in);
-        HotelInformation hotelInform = new HotelInformation();
 
         while (true) {
             int choiceNum = sc.nextInt();
@@ -50,7 +51,7 @@ public class Main {
 
     public static void customerDisplayHandle() {
         Scanner sc = new Scanner(System.in);
-        HotelInformation hotelInform = new HotelInformation();
+
         while (true) {
             int choiceNum = sc.nextInt();
             switch (choiceNum) {
@@ -58,7 +59,7 @@ public class Main {
                     hotelInform.customerRoom();
                     break;
                 case 2:
-//                    hotelInform.고객객실예약();
+                    hotelInform.insertCustomerInformation();
                     break;
                 case 3:
 //                    hotelInform.고객예약취소();
@@ -74,6 +75,7 @@ public class Main {
             }
         }
     }
+
 
     private static void getMainDisplay() {
         System.out.println("[우모호텔]");
