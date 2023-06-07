@@ -26,7 +26,8 @@ public class HotelInformation {
     }
 
     public void 호텔예약목록() {
-        System.out.println("호텔예약목록"); //hotelReservationCheck
+        //hotelReservationCheck : 객실, 이름, 전화번호, 날짜
+        System.out.println("호텔예약목록");
             for(int i = 0; i< reserveData.size();i++){
         ReserveData rd = reserveData.get(i);
         System.out.println
