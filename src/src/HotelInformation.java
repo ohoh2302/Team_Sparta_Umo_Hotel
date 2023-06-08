@@ -109,7 +109,7 @@ public class HotelInformation {
             //예약이 안되어있을경우
 
             // 객실에 정해진 가격보다 작으면 예약 불가하게 하기
-            if(checkPrice(roomNumber, money)){
+            if(checkPrice(roomNumber, Integer.parseInt(money))){
                 // 데이터 생성해주거나 맞춰주는 함수 생성
                 createList(roomNumber,name,phone);
             }else {
@@ -175,23 +175,25 @@ public class HotelInformation {
     // 객실 번호 입력 받기
 
     public void customerCancelCheck() {
+        Scanner sc =new Scanner(System.in);
         System.out.println("객실 번호를 입력하세요");
         int roomNum = sc.nextInt();
+        sc.nextLine();
 //
 //        System.out.println("사용자 이름을 입력하세요");
 //        String name = sc.nextLine();
 //
         System.out.println("예약 번호를 입력하세요");
-        int reserveNum = sc.nextInt();
-        sc.nextLine
+        String reserveNum = sc.nextLine();
+
         cancelReserve(roomNum, reserveNum);
 
 
 }
 
-    private void cancelReserve(int roomNumber, int reserveNum){
+    private void cancelReserve(int roomNumber, String reserveNum){
         for(int i = 0; i < reserveData.size() ; i++) {
-                if (reserveNum == reserveData.get(i).getReserveNumber()
+                if (reserveData.get(i).getReserveNumber().equals(reserveNum)
                     && roomNumber == reserveData.get(i).getHotelNumber()) { // 객실번호와 예약번호가 맞아야 취소
                     reserveCancel(roomNumber);// 취소하면 false로 다시 바꾸기
                     reserveData.remove(i);
@@ -223,11 +225,12 @@ public class HotelInformation {
 //    고객예약목록
     public void customerCheckList() {
         System.out.println("예약번호를 입력해주세요.");
-            int reserveNum = sc.nextInt();
+        String reserveNum = sc.nextLine();
 //            예약번호 맞는지 확인 후 목록 출력
         for(int i=0; i<reserveData.size(); i++) {
-            if (reserveNum == reserveData.get(i).getReserveNumber()) {
+            if (reserveData.get(i).getReserveNumber().equals(reserveNum)) {
                 ReserveData rd = reserveData.get(i);
+                System.out.println(rd.getHotelNumber());
                 System.out.println
                         (
                                 rd.getHotelNumber() + " | " +
@@ -238,11 +241,11 @@ public class HotelInformation {
         } Main.mainDisplayHandle();
     }
 
-    public ArrayList<Hotel> getHotels(){
+    public List<Hotel> getHotels(){
         return hotels;
     }
 
-    public ArrayList<Customer> customers(){
+    public List<Customer> customers(){
         return customers;
     }
 
