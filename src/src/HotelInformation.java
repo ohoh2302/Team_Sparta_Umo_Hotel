@@ -24,11 +24,11 @@ public class HotelInformation {
         hotels.add(new Hotel(3, 40,70000,false));
 
     }
-
+    //hotelReservationCheck : 객실, 이름, 전화번호, 날짜
     public void 호텔예약목록() {
-        //hotelReservationCheck : 객실, 이름, 전화번호, 날짜
         System.out.println("호텔예약목록");
-            for(int i = 0; i< reserveData.size();i++){
+        System.out.println("객실번호" + " | " +"이름"+ " | " + "전화번호" + " | " + "날짜");
+        for(int i = 0; i< reserveData.size();i++){
         ReserveData rd = reserveData.get(i);
         System.out.println
                 (
@@ -40,10 +40,17 @@ public class HotelInformation {
         Main.mainDisplayHandle();
     }
 
-//    public void 호텔자산() {
-//        System.out.println("호텔자산");
-//        Main.mainDisplayHandle();
-//    }
+    // hotelProperty : 고객이 예약시 호텔 자산이 증가함
+    public void 호텔자산() {
+        int sum = 0;
+        System.out.println("호텔자산");
+        for(int i = 0; i< reserveData.size();i++){
+            ReserveData rd = reserveData.get(i);
+            sum += rd.getPrice();
+        }
+        System.out.println("금액 : " + sum);
+        Main.mainDisplayHandle();
+    }
 
     public void customerRoom() {
         System.out.println("고객객실정보");

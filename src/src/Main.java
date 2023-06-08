@@ -38,7 +38,7 @@ public class Main {
                     hotelInform.호텔예약목록();
                     break;
                 case 2:
-//                    hotelInform.호텔자산();
+                    hotelInform.호텔자산();
                     break;
                 default:
                     System.out.println("[Error]");
