@@ -1,23 +1,27 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class HotelInformation {
     Scanner sc =new Scanner(System.in);
 
     //객실 정보 저장 리스트
-    private ArrayList<Hotel> hotels = new ArrayList<>();
+    private List<Hotel> hotels;
 
     // 고객 데이터 리스트
-    private ArrayList<Customer>  customers = new ArrayList<>();
+    private List<Customer>  customers;
 
     // 예약 데이터
-    private ArrayList<ReserveData>  reserveData = new ArrayList<>();
+    private List<ReserveData>  reserveData;
 
     // 예약 번호 생성에 필요한 hotel 을 불러옴
     Hotel hotel = new Hotel();
     public HotelInformation() {
+        hotels = new ArrayList<>();
+        customers = new ArrayList<>();
+        reserveData = new ArrayList<>();
         //HotelInformation 객체를 생성할때 호텔 객실 데이터 생성 후 저장
         hotels.add(new Hotel(1,29,40000,false));
         hotels.add(new Hotel(2, 32,50000,false));
@@ -65,23 +69,34 @@ public class HotelInformation {
 
     // 고갱 정보 입력
     public void insertCustomerInformation() {
+        boolean result;
 
         System.out.println("사용자 이름을 입력하세요");
         String name = sc.nextLine();
+        result = name.matches("^[가-힣]*$");
+        if(!result){
+            //위와같은 형식이 아니라면
+            System.out.println("이름은 한글만 입력해 주세요");
+            Main.mainDisplayHandle();
+        }
 
         System.out.println("사용자 전화번호를 입력하세요");
         String phone = sc.nextLine();
+        result = phone.matches("^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$");
+        if(!result){
+            //위와같은 형식이 아니라면
+            System.out.println("번호는 xxx-xxxx-xxxx 형태로 입력 바랍니다.");
+            Main.mainDisplayHandle();
+        }
 
         System.out.println("사용자 자금을 입력하세요");
-        int money = sc.nextInt();
-
-        // 사용자가 입력한 데이터를 이용해 고객 리스트 생성
-//        customers.add(new Customer(name, phone, money));
-
-//        System.out.println("customers.size()"+customers.size());
-//        for(int i =0; i<customers.size();i++){
-//            System.out.println(customers.get(i).getName() + customers.get(i).getPhone() + customers.get(i).getMoney());
-//        }
+        String money = sc.nextLine();
+        result = money.matches("^[0-9]*$");
+        if(!result){
+            //위와같은 형식이 아니라면
+            System.out.println("숫자만 입력하세요");
+            Main.mainDisplayHandle();
+        }
 
         // 객실 정보 출력
         customerRoom();
@@ -125,7 +140,7 @@ public class HotelInformation {
     private void createList(int roomNumber,String name, String phone) {
 
         //예약번호 생성
-        int reserveNumber = hotel.setReserveNumber();
+        String reserveNumber = hotel.setReserveNumber();
 
         //날짜 생성
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -138,8 +153,6 @@ public class HotelInformation {
                 , hotels.get(roomNumber).getSize(),hotels.get(roomNumber).getPrice(), reserveNumber , localDateTimeFormat));
 
 
-
-        System.out.println("reserveData.size()"+reserveData.size());
         for(int i =0; i<reserveData.size();i++){
             System.out.println(reserveData.get(i).getName() + reserveData.get(i).getPhone() + "number" + reserveData.get(i).getHotelNumber() + " size" + reserveData.get(i).getSize()
                     + " price " + reserveData.get(i).getPrice() + reserveData.get(i).getReserveNumber() + reserveData.get(i).getDate());
@@ -170,7 +183,7 @@ public class HotelInformation {
 //
         System.out.println("예약 번호를 입력하세요");
         int reserveNum = sc.nextInt();
-
+        sc.nextLine
         cancelReserve(roomNum, reserveNum);
 
 
