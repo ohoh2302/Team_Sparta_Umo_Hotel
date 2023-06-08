@@ -65,7 +65,7 @@ public class Main {
                     hotelInform.customerCancelCheck();
                     break;
                 case 4:
-//                    hotelInform.고객예약목록();
+                    hotelInform.customerCheckList();
                     break;
                 default:
                     System.out.println("[Error]");
@@ -101,6 +101,7 @@ public class Main {
         customerDisplayHandle();
 
     }
+
 
     private static void getHotelDisplay() {
         System.out.println("[호텔]");
