@@ -4,10 +4,10 @@ public class ReserveData {
     private int hotelNumber;
     private int size; // 방크기
     private int price; // 가격
-    private int reserveNumber; // 예약번호
+    private String reserveNumber; // 예약번호
     private String date; // 예약 날짜
 
-    public ReserveData(String name, String phone, int hotelNumber, int size, int price ,int reserveNumber, String date){
+    public ReserveData(String name, String phone, int hotelNumber, int size, int price ,String reserveNumber, String date){
         this.name = name;
         this.phone = phone;
         this.hotelNumber = hotelNumber;
@@ -37,7 +37,7 @@ public class ReserveData {
         return price;
     }
 
-    public int getReserveNumber() {
+    public String getReserveNumber() {
         return reserveNumber;
     }
     public String getDate(){
