@@ -1,4 +1,5 @@
 import javax.swing.plaf.PanelUI;
+import java.util.UUID;
 
 public class Hotel {
     //방을 특정할 수 있는 번호
