@@ -205,7 +205,8 @@ public class HotelInformation {
         }
 
         System.out.println("다시 입력해주세요.");
-        cancelReserve(roomNumber, reserveNum);
+        customerCancelCheck(); // 잘못 입력 한다면 다시 입력란으로 돌아가는 재귀함수
+
 
         }
 
