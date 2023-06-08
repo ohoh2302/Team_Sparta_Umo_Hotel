@@ -1,8 +1,10 @@
 import java.util.Scanner;
 
 public class Main {
+    private static HotelInformation hotelInform = new HotelInformation();
 
     public static void main(String[] args) {
+
         mainDisplayHandle();
     }
 
@@ -28,7 +30,6 @@ public class Main {
 
     public static void hotelDisplayHandle() {
         Scanner sc = new Scanner(System.in);
-        HotelInformation hotelInform = new HotelInformation();
 
         while (true) {
             int choiceNum = sc.nextInt();
@@ -37,7 +38,7 @@ public class Main {
                     hotelInform.호텔예약목록();
                     break;
                 case 2:
-                    hotelInform.호텔자산();
+//                    hotelInform.호텔자산();
                     break;
                 default:
                     System.out.println("[Error]");
@@ -50,21 +51,21 @@ public class Main {
 
     public static void customerDisplayHandle() {
         Scanner sc = new Scanner(System.in);
-        HotelInformation hotelInform = new HotelInformation();
+
         while (true) {
             int choiceNum = sc.nextInt();
             switch (choiceNum) {
                 case 1:
-                    hotelInform.고객객실정보();
+                    hotelInform.customerRoom();
                     break;
                 case 2:
-                    hotelInform.고객객실예약();
+                    hotelInform.insertCustomerInformation();
                     break;
                 case 3:
-                    hotelInform.고객예약취소();
+                    hotelInform.customerCancelCheck();
                     break;
                 case 4:
-                    hotelInform.고객예약목록();
+                    hotelInform.customerCheckList();
                     break;
                 default:
                     System.out.println("[Error]");
@@ -74,6 +75,7 @@ public class Main {
             }
         }
     }
+
 
     private static void getMainDisplay() {
         System.out.println("[우모호텔]");
@@ -91,6 +93,15 @@ public class Main {
 
         customerDisplayHandle();
     }
+
+    private void cancelReserve(){
+
+
+        System.out.println("취소하시겠습니까?");
+        customerDisplayHandle();
+
+    }
+
 
     private static void getHotelDisplay() {
         System.out.println("[호텔]");
