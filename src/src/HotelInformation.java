@@ -24,18 +24,19 @@ public class HotelInformation {
         hotels.add(new Hotel(3, 40,70000,false));
 
     }
-    //hotelReservationCheck : 객실, 이름, 전화번호, 날짜
+    //hotelReservationCheck : 객실번호, 날짜, 전화번호, 이름
     public void 호텔예약목록() {
         System.out.println("호텔예약목록");
-        System.out.println("객실번호" + " | " +"이름"+ " | " + "전화번호" + " | " + "날짜");
+        System.out.printf("%-4s   %-16s   %-16s   %-20s \n","Num","Date", "Phone", "예약명");
         for(int i = 0; i< reserveData.size();i++){
         ReserveData rd = reserveData.get(i);
-        System.out.println
-                (
-                        rd.getHotelNumber() + " | " +
-                        rd.getName() + " | " +
-                        rd.getPhone() + " | " +
-                        rd.getDate());
+        System.out.printf
+                ("%-4d | %-16s | %-16s | %-20s  \n" ,
+                        rd.getHotelNumber(),
+                        rd.getDate(),
+                        rd.getPhone(),
+                        rd.getName()
+                        );
     }
         Main.mainDisplayHandle();
     }
@@ -211,15 +212,17 @@ public class HotelInformation {
         System.out.println("예약번호를 입력해주세요.");
             int reserveNum = sc.nextInt();
 //            예약번호 맞는지 확인 후 목록 출력
+        System.out.printf("%-4s   %-16s   %-16s   %-20s \n","Num","Date", "Phone", "예약명");
         for(int i=0; i<reserveData.size(); i++) {
             if (reserveNum == reserveData.get(i).getReserveNumber()) {
                 ReserveData rd = reserveData.get(i);
-                System.out.println
-                        (
-                                rd.getHotelNumber() + " | " +
-                                        rd.getName() + " | " +
-                                        rd.getPhone() + " | " +
-                                        rd.getDate());
+                System.out.printf
+                        ("%-4d | %-16s | %-16s | %-20s  \n" ,
+                                rd.getHotelNumber(),
+                                rd.getDate(),
+                                rd.getPhone(),
+                                rd.getName()
+                        );
             }
         } Main.mainDisplayHandle();
     }
