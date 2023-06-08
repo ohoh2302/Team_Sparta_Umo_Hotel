@@ -28,24 +28,23 @@ public class HotelInformation {
         hotels.add(new Hotel(3, 40,70000,false));
 
     }
-    //hotelReservationCheck : 객실, 이름, 전화번호, 날짜
-    public void 호텔예약목록() {
+    public void hotelReservationCheck() {
         System.out.println("호텔예약목록");
-        System.out.println("객실번호" + " | " +"이름"+ " | " + "전화번호" + " | " + "날짜");
+        System.out.printf("%-4s   %-16s   %-16s   %-20s \n","Num","Date", "Phone", "예약자");
         for(int i = 0; i< reserveData.size();i++){
         ReserveData rd = reserveData.get(i);
-        System.out.println
-                (
-                        rd.getHotelNumber() + " | " +
-                        rd.getName() + " | " +
-                        rd.getPhone() + " | " +
-                        rd.getDate());
+        System.out.printf
+                ("%-4d | %-16s | %-16s | %-20s  \n" ,
+                        rd.getHotelNumber(),
+                        rd.getDate(),
+                        rd.getPhone(),
+                        rd.getName()
+                        );
     }
         Main.mainDisplayHandle();
     }
 
-    // hotelProperty : 고객이 예약시 호텔 자산이 증가함
-    public void 호텔자산() {
+    public void hotelProperty() {
         int sum = 0;
         System.out.println("호텔자산");
         for(int i = 0; i< reserveData.size();i++){
@@ -167,7 +166,6 @@ public class HotelInformation {
     }
 
     private void reserveComplete(int roomNumber) {
-
         hotels.get(roomNumber).setReserve(true);
     }
 
@@ -214,29 +212,22 @@ public class HotelInformation {
         hotels.get(roomNumber).setReserve(false);
     }
 
-
-
-
-
-
-
-
-
 //    고객예약목록
     public void customerCheckList() {
         System.out.println("예약번호를 입력해주세요.");
         String reserveNum = sc.nextLine();
 //            예약번호 맞는지 확인 후 목록 출력
+        System.out.printf("%-4s   %-16s   %-16s   %-20s \n","Num","Date", "Phone", "예약명");
         for(int i=0; i<reserveData.size(); i++) {
             if (reserveData.get(i).getReserveNumber().equals(reserveNum)) {
                 ReserveData rd = reserveData.get(i);
-                System.out.println(rd.getHotelNumber());
-                System.out.println
-                        (
-                                rd.getHotelNumber() + " | " +
-                                        rd.getName() + " | " +
-                                        rd.getPhone() + " | " +
-                                        rd.getDate());
+                System.out.printf
+                        ("%-4d | %-16s | %-16s | %-20s  \n" ,
+                                rd.getHotelNumber(),
+                                rd.getDate(),
+                                rd.getPhone(),
+                                rd.getName()
+                        );
             }
         } Main.mainDisplayHandle();
     }
