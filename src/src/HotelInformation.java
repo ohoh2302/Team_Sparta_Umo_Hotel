@@ -189,22 +189,29 @@ public class HotelInformation {
 
 }
 
-    private void cancelReserve(int roomNumber, String reserveNum){
-        for(int i = 0; i < reserveData.size() ; i++) {
-                if (reserveData.get(i).getReserveNumber().equals(reserveNum)
+    private void cancelReserve(int roomNumber, String reserveNum) {
+        for (int i = 0; i < reserveData.size(); i++) {
+            if (reserveData.get(i).getReserveNumber().equals(reserveNum)
                     && roomNumber == reserveData.get(i).getHotelNumber()) { // 객실번호와 예약번호가 맞아야 취소
-                    reserveCancel(roomNumber);// 취소하면 false로 다시 바꾸기
-                    reserveData.remove(i);
-                    System.out.println("취소 완료");
-                    Main.mainDisplayHandle();
-
-
-                } else System.out.println("다시 입력해주세요.");
+                reserveCancel(roomNumber);// 취소하면 false로 다시 바꾸기
+                reserveData.remove(i);
+                System.out.println("취소 완료");
                 Main.mainDisplayHandle();
-            }
+            } else if (roomNumber != reserveData.get(i).getHotelNumber()) {
+                continue;
 
-
+            } else System.out.println("다시 입력해주세요.");
+                    Main.mainDisplayHandle();
         }
+    }
+
+
+
+
+
+
+
+
 
         //boolean값 다시 false로 바꾸기
     private void reserveCancel(int roomNumber) {
