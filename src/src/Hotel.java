@@ -6,7 +6,7 @@ public class Hotel {
     private int size; // 방크기
     private int price; // 가격
     private boolean reserve; // 예약 여부
-    private int reserveNumber = 100; // 예약번호
+    private String reserveNumber; // 예약번호
     private String date; // 날자
 
     public Hotel(){
@@ -38,8 +38,9 @@ public class Hotel {
         this.reserve = reserve;
     }
 
-    public int setReserveNumber(){
-        ++reserveNumber;
+    public String setReserveNumber(){
+        UUID uuid4 = UUID.randomUUID();
+        reserveNumber = uuid4.toString();
         return reserveNumber;
     }
 
