@@ -267,7 +267,7 @@ public class HotelInformation {
                                 rd.getPhone(),
                                 rd.getName()
                         );
-            }
+            }else{}
         } Main.mainDisplayHandle();
     }
 
