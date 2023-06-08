@@ -35,10 +35,10 @@ public class Main {
             int choiceNum = sc.nextInt();
             switch (choiceNum) {
                 case 1:
-                    hotelInform.호텔예약목록();
+                    hotelInform.hotelReservationCheck();
                     break;
                 case 2:
-                    hotelInform.호텔자산();
+                    hotelInform.hotelProperty();
                     break;
                 default:
                     System.out.println("[Error]");
