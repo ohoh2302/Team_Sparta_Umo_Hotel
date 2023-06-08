@@ -173,7 +173,6 @@ public class HotelInformation {
 
 
     // 객실 번호 입력 받기
-
     public void customerCancelCheck() {
         Scanner sc = new Scanner(System.in);
         System.out.println("객실 번호를 입력하세요");
@@ -204,11 +203,34 @@ public class HotelInformation {
             }
         }
 
-        System.out.println("다시 입력해주세요.");
-        customerCancelCheck(); // 잘못 입력 한다면 다시 입력란으로 돌아가는 재귀함수
 
 
-        }
+        System.out.println("일치하는 정보가 없습니다.");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("1.계속 진행하시겠습니까?  2. 메뉴로 돌아가시겠습니까?");
+        int selectNum = sc.nextInt();
+
+        if(selectNum == 1){
+        customerCancelCheck();} // 1번 입력 한다면 다시 입력란으로 돌아가는 재귀함수
+        else if (selectNum == 2) {
+            Main.mainDisplayHandle(); // 2번 입력 다시 메뉴로 돌아가기
+
+        }else System.out.println("다시 입력하세요.");
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
