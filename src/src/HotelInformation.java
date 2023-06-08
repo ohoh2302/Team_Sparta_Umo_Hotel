@@ -24,18 +24,19 @@ public class HotelInformation {
         hotels.add(new Hotel(3, 40,70000,false));
 
     }
-    //hotelReservationCheck : 객실, 이름, 전화번호, 날짜
+    //hotelReservationCheck : 객실번호, 날짜, 전화번호, 이름
     public void 호텔예약목록() {
         System.out.println("호텔예약목록");
-        System.out.println("객실번호" + " | " +"이름"+ " | " + "전화번호" + " | " + "날짜");
+        System.out.printf("%-4s   %-16s   %-16s   %-20s \n","Num","Date", "Phone", "예약명");
         for(int i = 0; i< reserveData.size();i++){
         ReserveData rd = reserveData.get(i);
-        System.out.println
-                (
-                        rd.getHotelNumber() + " | " +
-                        rd.getName() + " | " +
-                        rd.getPhone() + " | " +
-                        rd.getDate());
+        System.out.printf
+                ("%-4d | %-16s | %-16s | %-20s  \n" ,
+                        rd.getHotelNumber(),
+                        rd.getDate(),
+                        rd.getPhone(),
+                        rd.getName()
+                        );
     }
         Main.mainDisplayHandle();
     }
@@ -157,15 +158,74 @@ public class HotelInformation {
         hotels.get(roomNumber).setReserve(true);
     }
 
-//    public void 고객예약취소() {
-//        System.out.println("고객예약취소");
-//        Main.mainDisplayHandle();
-//    }
 
-//    public void 고객예약목록() {
-//        System.out.println("고객예약목록");
-//        Main.mainDisplayHandle();
-//    }
+    // 객실 번호 입력 받기
+
+    public void customerCancelCheck() {
+        System.out.println("객실 번호를 입력하세요");
+        int roomNum = sc.nextInt();
+//
+//        System.out.println("사용자 이름을 입력하세요");
+//        String name = sc.nextLine();
+//
+        System.out.println("예약 번호를 입력하세요");
+        int reserveNum = sc.nextInt();
+
+        cancelReserve(roomNum, reserveNum);
+
+
+}
+
+    private void cancelReserve(int roomNumber, int reserveNum){
+        for(int i = 0; i < reserveData.size() ; i++) {
+                if (reserveNum == reserveData.get(i).getReserveNumber()
+                    && roomNumber == reserveData.get(i).getHotelNumber()) { // 객실번호와 예약번호가 맞아야 취소
+                    reserveCancel(roomNumber);// 취소하면 false로 다시 바꾸기
+                    reserveData.remove(i);
+                    System.out.println("취소 완료");
+                    Main.mainDisplayHandle();
+
+
+                } else System.out.println("다시 입력해주세요.");
+                Main.mainDisplayHandle();
+            }
+
+
+        }
+
+        //boolean값 다시 false로 바꾸기
+    private void reserveCancel(int roomNumber) {
+        roomNumber--;
+        hotels.get(roomNumber).setReserve(false);
+    }
+
+
+
+
+
+
+
+
+
+//    고객예약목록
+    public void customerCheckList() {
+        System.out.println("예약번호를 입력해주세요.");
+            int reserveNum = sc.nextInt();
+//            예약번호 맞는지 확인 후 목록 출력
+        System.out.printf("%-4s   %-16s   %-16s   %-20s \n","Num","Date", "Phone", "예약명");
+        for(int i=0; i<reserveData.size(); i++) {
+            if (reserveNum == reserveData.get(i).getReserveNumber()) {
+                ReserveData rd = reserveData.get(i);
+                System.out.printf
+                        ("%-4d | %-16s | %-16s | %-20s  \n" ,
+                                rd.getHotelNumber(),
+                                rd.getDate(),
+                                rd.getPhone(),
+                                rd.getName()
+                        );
+            }
+        } Main.mainDisplayHandle();
+    }
 
     public ArrayList<Hotel> getHotels(){
         return hotels;
