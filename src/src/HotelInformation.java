@@ -200,18 +200,23 @@ public class HotelInformation {
 
 
 
-
-
-
-
-
-
-
-
-//    public void 고객예약목록() {
-//        System.out.println("고객예약목록");
-//        Main.mainDisplayHandle();
-//    }
+//    고객예약목록
+    public void customerCheckList() {
+        System.out.println("예약번호를 입력해주세요.");
+            int reserveNum = sc.nextInt();
+//            예약번호 맞는지 확인 후 목록 출력
+        for(int i=0; i<reserveData.size(); i++) {
+            if (reserveNum == reserveData.get(i).getReserveNumber()) {
+                ReserveData rd = reserveData.get(i);
+                System.out.println
+                        (
+                                rd.getHotelNumber() + " | " +
+                                        rd.getName() + " | " +
+                                        rd.getPhone() + " | " +
+                                        rd.getDate());
+            }
+        } Main.mainDisplayHandle();
+    }
 
     public ArrayList<Hotel> getHotels(){
         return hotels;
