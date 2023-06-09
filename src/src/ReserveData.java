@@ -1,4 +1,6 @@
-public class ReserveData {
+import java.util.Comparator;
+
+public class ReserveData implements Comparator<ReserveData> {
     private String name;
     private String phone;
     private int hotelNumber;
@@ -42,5 +44,20 @@ public class ReserveData {
     }
     public String getDate(){
         return date;
+    }
+    public ReserveData(){}
+    @Override
+    public int compare(ReserveData o1, ReserveData o2) {
+        int HotelNumber1 = o1.getHotelNumber();
+        //기준시간
+        int HotelNumber2 = o2.getHotelNumber();
+        if(HotelNumber1 == HotelNumber2){
+            return 0;
+        }
+        else if(HotelNumber1 > HotelNumber2){
+            return 1;
+        } else{
+            return -1;
+        }
     }
 }

@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -13,22 +14,29 @@ public class Main {
         getMainDisplay();
 
         while (true) {
-            String choiceNum = sc.nextLine();
-            switch (choiceNum) {
-                case "1":
-                    getHotelDisplay();
-                    break;
-                case "2":
-                    getCustomerDisplay();
-                    break;
-                case "3":
-                    exitKiosk();
-                    break;
-                default:
-                    System.out.println("[Error]");
-                    System.out.println("초기화면으로 돌아갑니다.\n");
-                    mainDisplayHandle();
-                    break;
+            try {
+                int choiceNum = sc.nextInt();
+
+                switch (choiceNum) {
+                    case 1:
+                        getHotelDisplay();
+                        break;
+                    case 2:
+                        getCustomerDisplay();
+                        break;
+                    case 3:
+                        exitKiosk();
+                        break;
+                    default:
+                        System.out.println("[Error]");
+                        System.out.println("초기화면으로 돌아갑니다.\n");
+                        mainDisplayHandle();
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("[Error]");
+                System.out.println("올바른 숫자를 입력해주세요.\n");
+                mainDisplayHandle();
             }
         }
     }
@@ -37,12 +45,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            String choiceNum = sc.nextLine();
+            int choiceNum = sc.nextInt();
             switch (choiceNum) {
-                case "1":
+                case 1:
                     hotelInform.hotelReservationCheck();
                     break;
-                case "2":
+                case 2:
                     hotelInform.hotelProperty();
                     break;
                 default:
@@ -58,18 +66,18 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            String choiceNum = sc.nextLine();
+            int choiceNum = sc.nextInt();
             switch (choiceNum) {
-                case "1":
-                    hotelInform.customerRoom();
+                case 1:
+                    hotelInform.getCustomerRoom();
                     break;
-                case "2":
-                    hotelInform.insertCustomerInformation();
+                case 2:
+                    hotelInform.setCustomerInformation();
                     break;
-                case "3":
+                case 3:
                     hotelInform.customerCancelCheck();
                     break;
-                case "4":
+                case 4:
                     hotelInform.customerCheckList();
                     break;
                 default:
