@@ -1,8 +1,11 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+    private static HotelInformation hotelInform = new HotelInformation();
 
     public static void main(String[] args) {
+
         mainDisplayHandle();
     }
 
@@ -11,37 +14,48 @@ public class Main {
         getMainDisplay();
 
         while (true) {
-            int choiceNum = sc.nextInt();
-            switch (choiceNum) {
-                case 1:
-                    getHotelDisplay();
-                    break;
-                case 2:
-                    getCustomerDisplay();
-                    break;
-                case 3:
-                    exitKiosk();
-                    break;
+            try {
+                int choiceNum = sc.nextInt();
+
+                switch (choiceNum) {
+                    case 1:
+                        getHotelDisplay();
+                        break;
+                    case 2:
+                        getCustomerDisplay();
+                        break;
+                    case 3:
+                        exitKiosk();
+                        break;
+                    default:
+                        System.out.println("[Error]");
+                        System.out.println("초기화면으로 돌아갑니다.\n");
+                        mainDisplayHandle();
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("[Error]");
+                System.out.println("올바른 숫자를 입력해주세요.\n");
+                mainDisplayHandle();
             }
         }
     }
 
     public static void hotelDisplayHandle() {
         Scanner sc = new Scanner(System.in);
-        HotelInformation hotelInform = new HotelInformation();
 
         while (true) {
             int choiceNum = sc.nextInt();
             switch (choiceNum) {
                 case 1:
-                    hotelInform.호텔예약목록();
+                    hotelInform.hotelReservationCheck();
                     break;
                 case 2:
-                    hotelInform.호텔자산();
+                    hotelInform.hotelProperty();
                     break;
                 default:
                     System.out.println("[Error]");
-                    System.out.println("초기화면으로 돌아갑니다.");
+                    System.out.println("초기화면으로 돌아갑니다.\n");
                     mainDisplayHandle();
                     break;
             }
@@ -50,30 +64,31 @@ public class Main {
 
     public static void customerDisplayHandle() {
         Scanner sc = new Scanner(System.in);
-        HotelInformation hotelInform = new HotelInformation();
+
         while (true) {
             int choiceNum = sc.nextInt();
             switch (choiceNum) {
                 case 1:
-                    hotelInform.고객객실정보();
+                    hotelInform.getCustomerRoom();
                     break;
                 case 2:
-                    hotelInform.고객객실예약();
+                    hotelInform.setCustomerInformation();
                     break;
                 case 3:
-                    hotelInform.고객예약취소();
+                    hotelInform.customerCancelCheck();
                     break;
                 case 4:
-                    hotelInform.고객예약목록();
+                    hotelInform.customerCheckList();
                     break;
                 default:
                     System.out.println("[Error]");
-                    System.out.println("초기화면으로 돌아갑니다.");
+                    System.out.println("초기화면으로 돌아갑니다.\n");
                     mainDisplayHandle();
                     break;
             }
         }
     }
+
 
     private static void getMainDisplay() {
         System.out.println("[우모호텔]");
