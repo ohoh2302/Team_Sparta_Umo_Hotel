@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -13,17 +14,29 @@ public class Main {
         getMainDisplay();
 
         while (true) {
-            int choiceNum = sc.nextInt();
-            switch (choiceNum) {
-                case 1:
-                    getHotelDisplay();
-                    break;
-                case 2:
-                    getCustomerDisplay();
-                    break;
-                case 3:
-                    exitKiosk();
-                    break;
+            try {
+                int choiceNum = sc.nextInt();
+
+                switch (choiceNum) {
+                    case 1:
+                        getHotelDisplay();
+                        break;
+                    case 2:
+                        getCustomerDisplay();
+                        break;
+                    case 3:
+                        exitKiosk();
+                        break;
+                    default:
+                        System.out.println("[Error]");
+                        System.out.println("초기화면으로 돌아갑니다.\n");
+                        mainDisplayHandle();
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("[Error]");
+                System.out.println("올바른 숫자를 입력해주세요.\n");
+                mainDisplayHandle();
             }
         }
     }
@@ -42,7 +55,7 @@ public class Main {
                     break;
                 default:
                     System.out.println("[Error]");
-                    System.out.println("초기화면으로 돌아갑니다.");
+                    System.out.println("초기화면으로 돌아갑니다.\n");
                     mainDisplayHandle();
                     break;
             }
@@ -56,10 +69,10 @@ public class Main {
             int choiceNum = sc.nextInt();
             switch (choiceNum) {
                 case 1:
-                    hotelInform.customerRoom();
+                    hotelInform.getCustomerRoom();
                     break;
                 case 2:
-                    hotelInform.insertCustomerInformation();
+                    hotelInform.setCustomerInformation();
                     break;
                 case 3:
                     hotelInform.customerCancelCheck();
@@ -69,7 +82,7 @@ public class Main {
                     break;
                 default:
                     System.out.println("[Error]");
-                    System.out.println("초기화면으로 돌아갑니다.");
+                    System.out.println("초기화면으로 돌아갑니다.\n");
                     mainDisplayHandle();
                     break;
             }
@@ -93,15 +106,6 @@ public class Main {
 
         customerDisplayHandle();
     }
-
-    private void cancelReserve(){
-
-
-        System.out.println("취소하시겠습니까?");
-        customerDisplayHandle();
-
-    }
-
 
     private static void getHotelDisplay() {
         System.out.println("[호텔]");

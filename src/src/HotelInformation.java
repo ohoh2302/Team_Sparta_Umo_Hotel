@@ -1,6 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -57,9 +58,21 @@ public class HotelInformation {
         Main.mainDisplayHandle();
     }
 
+    //객실 정보 조회
+    public void getCustomerRoom() {
+        customerRoom();
+        System.out.println("1. 예약하기  2. 돌아가기");
+        int number = sc.nextInt();
+        sc.nextLine();
+        if(number == 1){
+            setCustomerInformation();
+        }else{
+            Main.mainDisplayHandle();
+        }
+    }
+
     public void customerRoom() {
         System.out.println("고객객실정보");
-
 
         for (int i = 0; i < hotels.size(); i++) {
             System.out.println(hotels.get(i).getHotelNumber() + ". | " + hotels.get(i).getSize() + " | " + hotels.get(i).getPrice()
@@ -68,43 +81,58 @@ public class HotelInformation {
 
     }
 
+    // 데이터 입력시 형식에 맞는지 확인
+    public String chekMatche(String name, String formData,String comment){
+        boolean result =  name.matches(formData);
+        if(!result){
+            //위와같은 형식이 아니라면
+            System.out.println(comment);
+            System.out.println("다시 입력해 주세요");
+            String otherName = sc.nextLine();
+            //제귀
+            return chekMatche(otherName, formData, comment);
+        }
+        return name;
+    }
+
     // 고갱 정보 입력
-    public void insertCustomerInformation() {
-        boolean result;
+    public void setCustomerInformation() {
+        //name phone money 를 차례로 입력받는다
+        // 3개의 값을 메치로 검사한다.
+        // 검사중 다른점이 있으면 다시 적게하기
+        String formData; // 형식데이터
+        boolean result; // 형식이 맞는지 확인하는 true/false
+        String comment; // 맨트
+        comment = "한글만 입력하셔야 합니다";
+        System.out.println("사용자 이름을 입력하세요.("+comment+")");
 
-        System.out.println("사용자 이름을 입력하세요");
-        String name = sc.nextLine();
-        result = name.matches("^[가-힣]*$");
-        if (!result) {
-            //위와같은 형식이 아니라면
-            System.out.println("이름은 한글만 입력해 주세요");
-            Main.mainDisplayHandle();
-        }
+        formData = "^[가-힣]*$";
+        String name = chekMatche(sc.nextLine(), formData, comment);
+        System.out.println("사용자 전화번호를 입력하세요.");
 
-        System.out.println("사용자 전화번호를 입력하세요");
-        String phone = sc.nextLine();
-        result = phone.matches("^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$");
-        if (!result) {
-            //위와같은 형식이 아니라면
-            System.out.println("번호는 xxx-xxxx-xxxx 형태로 입력 바랍니다.");
-            Main.mainDisplayHandle();
-        }
+        comment = "xxx-xxxx-xxxx 형태로,  - 와같이 입력해 주세요.";
+        System.out.println(comment);
 
-        System.out.println("사용자 자금을 입력하세요");
-        String money = sc.nextLine();
-        result = money.matches("^[0-9]*$");
-        if (!result) {
-            //위와같은 형식이 아니라면
-            System.out.println("숫자만 입력하세요");
-            Main.mainDisplayHandle();
-        }
+        formData = "^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$";
+        String phone = chekMatche(sc.nextLine(), formData, comment);
+        comment = "숫자만입력해 주세요";
+        System.out.println("사용자 자금을 입력하세요.("+comment+")");
+
+        formData = "^[0-9]*$";
+        String money = chekMatche(sc.nextLine(), formData, comment);
 
         // 객실 정보 출력
         customerRoom();
 
-        System.out.println("객실을 선택하세요");
-        int roomNumber = sc.nextInt() - 1;
-        sc.nextLine();
+        comment = "객실을 선택하세요. (정해진 번호만 입력하세요)";
+        System.out.println(comment);
+
+        String roomSize = String.valueOf(hotels.size());
+        formData = "[1-"+roomSize+"]";
+
+        // 객실과 다른 번호를 입력했을시 다시 입력
+        int roomNumber = Integer.parseInt(chekMatche(sc.nextLine(), formData, comment))-1;
+
         //객실이 예약이 되어있는지 확인
         if (!hotels.get(roomNumber).getReserve()) {
             //예약이 안되어있을경우
@@ -153,13 +181,22 @@ public class HotelInformation {
         reserveData.add(new ReserveData(name, phone, hotels.get(roomNumber).getHotelNumber()
                 , hotels.get(roomNumber).getSize(), hotels.get(roomNumber).getPrice(), reserveNumber, localDateTimeFormat));
 
-
-        for (int i = 0; i < reserveData.size(); i++) {
-            System.out.println(reserveData.get(i).getName() + reserveData.get(i).getPhone() + "number" + reserveData.get(i).getHotelNumber() + " size" + reserveData.get(i).getSize()
-                    + " price " + reserveData.get(i).getPrice() + reserveData.get(i).getReserveNumber() + reserveData.get(i).getDate());
-        }
+        //리스트를 방번호순으로 정렬
+        Collections.sort(reserveData, new ReserveData());
 
         System.out.println("예약이 완료 되었습니다.");
+        System.out.println(name +"님의 예약 내용입니다");
+        //객실 사이즈 가격 예약번호
+        System.out.printf("%10s | %4s | %5s | %13s ","RoomNumber", "Size", "Price" ,"ReserveNumber");
+        System.out.println();
+
+        for(int i = 0; i<reserveData.size();i++){
+            if(phone.equals(reserveData.get(i).getPhone())) {
+                System.out.printf("%10d | %4d | %5d | %13s ", reserveData.get(i).getHotelNumber(), reserveData.get(i).getSize(),
+                        reserveData.get(i).getPrice(),reserveData.get(i).getReserveNumber());
+                System.out.println();
+            }
+        }
 
         // 객실 정보 true 변경 함수
         reserveComplete(roomNumber);
@@ -178,10 +215,7 @@ public class HotelInformation {
         System.out.println("객실 번호를 입력하세요");
         int roomNum = sc.nextInt();
         sc.nextLine();
-//
-//        System.out.println("사용자 이름을 입력하세요");
-//        String name = sc.nextLine();
-//
+
         System.out.println("예약 번호를 입력하세요");
         String reserveNum = sc.nextLine();
 
@@ -199,11 +233,8 @@ public class HotelInformation {
                 System.out.println("취소 완료");
                 Main.mainDisplayHandle();
 
-            } else {
             }
         }
-
-
 
         System.out.println("일치하는 정보가 없습니다.");
         Scanner sc = new Scanner(System.in);
@@ -219,32 +250,6 @@ public class HotelInformation {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //boolean값 다시 false로 바꾸기
     private void reserveCancel(int roomNumber) {
         roomNumber--;
@@ -256,7 +261,7 @@ public class HotelInformation {
         System.out.println("예약번호를 입력해주세요.");
         String reserveNum = sc.nextLine();
 //            예약번호 맞는지 확인 후 목록 출력
-        System.out.printf("%-4s   %-16s   %-16s   %-20s \n","Num","Date", "Phone", "예약명");
+        System.out.printf("%-4s   %-16s   %-16s   %-20s \n","Num","Date", "Phone", "예약자");
         for(int i=0; i<reserveData.size(); i++) {
             if (reserveData.get(i).getReserveNumber().equals(reserveNum)) {
                 ReserveData rd = reserveData.get(i);
