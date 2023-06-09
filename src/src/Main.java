@@ -13,16 +13,21 @@ public class Main {
         getMainDisplay();
 
         while (true) {
-            int choiceNum = sc.nextInt();
+            String choiceNum = sc.nextLine();
             switch (choiceNum) {
-                case 1:
+                case "1":
                     getHotelDisplay();
                     break;
-                case 2:
+                case "2":
                     getCustomerDisplay();
                     break;
-                case 3:
+                case "3":
                     exitKiosk();
+                    break;
+                default:
+                    System.out.println("[Error]");
+                    System.out.println("초기화면으로 돌아갑니다.\n");
+                    mainDisplayHandle();
                     break;
             }
         }
@@ -32,17 +37,17 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            int choiceNum = sc.nextInt();
+            String choiceNum = sc.nextLine();
             switch (choiceNum) {
-                case 1:
+                case "1":
                     hotelInform.hotelReservationCheck();
                     break;
-                case 2:
+                case "2":
                     hotelInform.hotelProperty();
                     break;
                 default:
                     System.out.println("[Error]");
-                    System.out.println("초기화면으로 돌아갑니다.");
+                    System.out.println("초기화면으로 돌아갑니다.\n");
                     mainDisplayHandle();
                     break;
             }
@@ -53,23 +58,23 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            int choiceNum = sc.nextInt();
+            String choiceNum = sc.nextLine();
             switch (choiceNum) {
-                case 1:
+                case "1":
                     hotelInform.customerRoom();
                     break;
-                case 2:
+                case "2":
                     hotelInform.insertCustomerInformation();
                     break;
-                case 3:
+                case "3":
                     hotelInform.customerCancelCheck();
                     break;
-                case 4:
+                case "4":
                     hotelInform.customerCheckList();
                     break;
                 default:
                     System.out.println("[Error]");
-                    System.out.println("초기화면으로 돌아갑니다.");
+                    System.out.println("초기화면으로 돌아갑니다.\n");
                     mainDisplayHandle();
                     break;
             }
@@ -93,15 +98,6 @@ public class Main {
 
         customerDisplayHandle();
     }
-
-    private void cancelReserve(){
-
-
-        System.out.println("취소하시겠습니까?");
-        customerDisplayHandle();
-
-    }
-
 
     private static void getHotelDisplay() {
         System.out.println("[호텔]");

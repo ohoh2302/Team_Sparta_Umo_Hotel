@@ -60,7 +60,6 @@ public class HotelInformation {
     public void customerRoom() {
         System.out.println("고객객실정보");
 
-
         for (int i = 0; i < hotels.size(); i++) {
             System.out.println(hotels.get(i).getHotelNumber() + ". | " + hotels.get(i).getSize() + " | " + hotels.get(i).getPrice()
                     + " | " + hotels.get(i).getReserve());
@@ -153,13 +152,8 @@ public class HotelInformation {
         reserveData.add(new ReserveData(name, phone, hotels.get(roomNumber).getHotelNumber()
                 , hotels.get(roomNumber).getSize(), hotels.get(roomNumber).getPrice(), reserveNumber, localDateTimeFormat));
 
-
-        for (int i = 0; i < reserveData.size(); i++) {
-            System.out.println(reserveData.get(i).getName() + reserveData.get(i).getPhone() + "number" + reserveData.get(i).getHotelNumber() + " size" + reserveData.get(i).getSize()
-                    + " price " + reserveData.get(i).getPrice() + reserveData.get(i).getReserveNumber() + reserveData.get(i).getDate());
-        }
-
         System.out.println("예약이 완료 되었습니다.");
+        System.out.println("예약번호 -> " + reserveData.get(roomNumber).getReserveNumber());
 
         // 객실 정보 true 변경 함수
         reserveComplete(roomNumber);
@@ -178,10 +172,7 @@ public class HotelInformation {
         System.out.println("객실 번호를 입력하세요");
         int roomNum = sc.nextInt();
         sc.nextLine();
-//
-//        System.out.println("사용자 이름을 입력하세요");
-//        String name = sc.nextLine();
-//
+
         System.out.println("예약 번호를 입력하세요");
         String reserveNum = sc.nextLine();
 
@@ -199,11 +190,8 @@ public class HotelInformation {
                 System.out.println("취소 완료");
                 Main.mainDisplayHandle();
 
-            } else {
             }
         }
-
-
 
         System.out.println("일치하는 정보가 없습니다.");
         Scanner sc = new Scanner(System.in);
@@ -219,32 +207,6 @@ public class HotelInformation {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //boolean값 다시 false로 바꾸기
     private void reserveCancel(int roomNumber) {
         roomNumber--;
@@ -256,7 +218,7 @@ public class HotelInformation {
         System.out.println("예약번호를 입력해주세요.");
         String reserveNum = sc.nextLine();
 //            예약번호 맞는지 확인 후 목록 출력
-        System.out.printf("%-4s   %-16s   %-16s   %-20s \n","Num","Date", "Phone", "예약명");
+        System.out.printf("%-4s   %-16s   %-16s   %-20s \n","Num","Date", "Phone", "예약자");
         for(int i=0; i<reserveData.size(); i++) {
             if (reserveData.get(i).getReserveNumber().equals(reserveNum)) {
                 ReserveData rd = reserveData.get(i);
